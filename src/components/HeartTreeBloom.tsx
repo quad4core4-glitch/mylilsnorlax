@@ -4,8 +4,13 @@ import { useEffect } from "react";
 /** Crown rows from wide (bottom of crown) to tip — drawn above trunk in flex-col-reverse order. */
 const CROWN_ROWS = [6, 5, 4, 3, 2, 1];
 
-const HEART_PATH =
-  "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+/** Cordate (heart-shaped) leaf blade — rounded apex + two basal lobes, not a Valentine heart. */
+const LEAF_PATH =
+  "M12 26.5 C7 25.5 3.5 20 4 14 C4.5 8 8 4 12 6 C16 4 19.5 8 20 14 C20.5 20 17 25.5 12 26.5 Z";
+
+/** Organic trunk: curved sides, wider base, narrow crown attachment, soft top. */
+const TRUNK_PATH =
+  "M24 148 C10 147 4 132 4 112 C4 78 9 42 15 8 Q24 2 33 8 C39 42 44 78 44 112 C44 132 38 147 24 148 Z";
 
 type HeartTreeBloomProps = {
   open: boolean;
@@ -35,8 +40,8 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
         >
           <svg width="0" height="0" className="absolute overflow-hidden" aria-hidden>
             <defs>
-              <linearGradient id="heartTreeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fda4af" />
+              <linearGradient id="leafCrownGrad" x1="10%" y1="100%" x2="90%" y2="0%">
+                <stop offset="0%" stopColor="#fb7185" />
                 <stop offset="45%" stopColor="#f43f5e" />
                 <stop offset="100%" stopColor="#fb923c" />
               </linearGradient>
@@ -49,43 +54,78 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 95, damping: 16, mass: 0.85 }}
           >
-            <motion.div
+            <motion.svg
               aria-hidden
-              className="relative w-3 origin-bottom rounded-full shadow-[0_0_24px_rgba(251,146,60,0.35)] md:w-4"
-              style={{
-                height: "clamp(6.5rem, 20vh, 10rem)",
-                background: "linear-gradient(to top, #713f12, #b45309, #eab308)",
-                boxShadow:
-                  "inset 0 -10px 18px rgba(0,0,0,0.4), inset 0 4px 12px rgba(255,255,255,0.12), 0 0 28px rgba(251,146,60,0.4)",
-              }}
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1 }}
-              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            />
+              viewBox="0 0 48 148"
+              preserveAspectRatio="xMidYMax meet"
+              className="relative w-[3.25rem] overflow-visible drop-shadow-[0_10px_28px_rgba(251,146,60,0.35)] md:w-[4.25rem]"
+              style={{ height: "clamp(7rem, 22vh, 11rem)" }}
+              initial={{ opacity: 1 }}
+            >
+              <defs>
+                <linearGradient id="trunkWoodGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#451a03" />
+                  <stop offset="35%" stopColor="#78350f" />
+                  <stop offset="72%" stopColor="#b45309" />
+                  <stop offset="100%" stopColor="#d4a574" />
+                </linearGradient>
+                <linearGradient id="trunkSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                  <stop offset="42%" stopColor="rgba(255,255,255,0.14)" />
+                  <stop offset="58%" stopColor="rgba(255,255,255,0.06)" />
+                  <stop offset="100%" stopColor="rgba(0,0,0,0.12)" />
+                </linearGradient>
+              </defs>
+              <motion.g
+                style={{ transformOrigin: "24px 148px", transformBox: "fill-box" }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <path d={TRUNK_PATH} fill="url(#trunkWoodGrad)" />
+                <path
+                  d={TRUNK_PATH}
+                  fill="none"
+                  stroke="rgba(62, 32, 10, 0.42)"
+                  strokeWidth="0.55"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+                <path
+                  d={TRUNK_PATH}
+                  fill="url(#trunkSheen)"
+                  opacity={0.95}
+                  style={{ mixBlendMode: "soft-light" }}
+                />
+              </motion.g>
+            </motion.svg>
 
             {CROWN_ROWS.map((count, rowIndex) => (
               <div
                 key={`row-${count}`}
                 className="mb-0.5 flex flex-row justify-center gap-0.5 md:mb-1 md:gap-1"
               >
-                {Array.from({ length: count }).map((_, hi) => (
-                  <motion.div
-                    key={`h-${rowIndex}-${hi}`}
-                    initial={{ scale: 0, opacity: 0, rotate: -40, y: 24 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0, y: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 280,
-                      damping: 16,
-                      delay: 0.52 + rowIndex * 0.1 + hi * 0.035,
-                    }}
-                    className="drop-shadow-[0_8px_18px_rgba(244,63,94,0.55)]"
-                  >
-                    <svg viewBox="0 0 24 24" className="h-5 w-5 md:h-7 md:w-7" aria-hidden>
-                      <path fill="url(#heartTreeGrad)" d={HEART_PATH} />
-                    </svg>
-                  </motion.div>
-                ))}
+                {Array.from({ length: count }).map((_, hi) => {
+                  const tilt = ((hi + rowIndex) % 5) * 4 - 8;
+                  return (
+                    <motion.div
+                      key={`h-${rowIndex}-${hi}`}
+                      initial={{ scale: 0, opacity: 0, rotate: -40 + tilt * 0.4, y: 24 }}
+                      animate={{ scale: 1, opacity: 1, rotate: tilt, y: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 280,
+                        damping: 16,
+                        delay: 0.52 + rowIndex * 0.1 + hi * 0.035,
+                      }}
+                      className="drop-shadow-[0_6px_14px_rgba(244,63,94,0.45)]"
+                    >
+                      <svg viewBox="0 0 24 28" className="h-5 w-5 md:h-7 md:w-7" aria-hidden>
+                        <path fill="url(#leafCrownGrad)" d={LEAF_PATH} />
+                      </svg>
+                    </motion.div>
+                  );
+                })}
               </div>
             ))}
 
