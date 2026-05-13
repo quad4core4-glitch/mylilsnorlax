@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import { HeartTreeBloom } from "./HeartTreeBloom";
@@ -7,6 +7,7 @@ import { Particles } from "./Particles";
 
 export function Hero() {
   const [treeOpen, setTreeOpen] = useState(false);
+  const [loveFlash, setLoveFlash] = useState(false);
 
   const scrollDown = useCallback(() => {
     document.getElementById("story")?.scrollIntoView({ behavior: "smooth" });
@@ -18,12 +19,28 @@ export function Hero() {
   }, [scrollDown]);
 
   const handleCTAClick = useCallback(() => {
+    setLoveFlash(true);
     setTreeOpen(true);
+    window.setTimeout(() => setLoveFlash(false), 900);
   }, []);
 
   return (
     <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <HeartTreeBloom open={treeOpen} onComplete={handleBloomComplete} />
+
+      <AnimatePresence>
+        {loveFlash ? (
+          <motion.div
+            key="love-flash"
+            className="pointer-events-none fixed inset-0 z-[47] bg-[radial-gradient(circle_at_50%_52%,rgba(251,113,133,0.5),rgba(244,63,94,0.18)_38%,transparent_62%)]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.85, 0.35, 0] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.85, ease: "easeOut" }}
+            aria-hidden
+          />
+        ) : null}
+      </AnimatePresence>
 
       <div className="absolute inset-0">
         <img
