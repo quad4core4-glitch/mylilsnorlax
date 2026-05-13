@@ -29,9 +29,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="text-gradient text-5xl font-extralight leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
+          className="text-5xl font-extralight leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
         >
-          Annnoiii😽
+          <span className="text-gradient">Annoii!</span>
+          <span className="text-foreground">😽</span>
         </motion.h1>
 
         <motion.div
@@ -41,10 +42,14 @@ export function Hero() {
           className="mt-12 flex justify-center"
         >
           <button
+            type="button"
             onClick={scrollDown}
-            className="group glass relative overflow-hidden rounded-full px-9 py-4 text-sm font-light tracking-widest text-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)]"
+            className="group glass relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-9 py-4 text-sm font-light tracking-widest text-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)]"
           >
-            <span className="relative z-10">click here</span>
+            <span className="relative z-10 text-lg leading-none" aria-hidden>
+              🧸
+            </span>
+            <span className="relative z-10">Click Me</span>
             <span className="absolute inset-0 -z-0 bg-gradient-to-r from-accent/0 via-accent/30 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
         </motion.div>
