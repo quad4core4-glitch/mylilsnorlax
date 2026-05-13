@@ -5,6 +5,7 @@ import { Timeline } from "@/components/Timeline";
 import { Gallery } from "@/components/Gallery";
 import { Finale } from "@/components/Finale";
 import { MusicToggle } from "@/components/MusicToggle";
+import { Moonlight } from "@/components/Moonlight";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
+      <Moonlight />
       <MusicToggle />
       <Hero />
       <StoryIntro />
