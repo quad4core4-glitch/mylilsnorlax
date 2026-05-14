@@ -43,7 +43,7 @@ export function Gallery() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="gallery" className="relative py-32 px-6 overflow-hidden">
+    <section id="gallery" className="relative overflow-hidden px-4 py-20 sm:px-6 md:py-32">
       {/* 3D heart particles drifting behind the grid */}
       <div className="pointer-events-none absolute inset-0 opacity-60">
         <HeartParticles count={60} />
@@ -55,21 +55,21 @@ export function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
-          className="mb-20 text-center"
+          className="mb-12 text-center md:mb-20"
         >
-          <p className="mb-4 text-xs font-light tracking-[0.4em] text-muted-foreground uppercase">
+          <p className="mb-3 text-[10px] font-light tracking-[0.4em] text-muted-foreground uppercase sm:text-xs">
             Frames
           </p>
-          <h2 className="text-gradient text-4xl font-extralight md:text-6xl">
+          <h2 className="text-gradient text-3xl font-extralight sm:text-4xl md:text-6xl">
             Twenty pieces of us
           </h2>
-          <p className="mx-auto mt-6 max-w-md text-sm font-light leading-relaxed text-muted-foreground/80">
+          <p className="mx-auto mt-5 max-w-md text-[13px] font-light leading-relaxed text-muted-foreground/80 sm:text-sm">
             small moments, scattered like stars — each one quietly proving you were here.
           </p>
         </motion.div>
 
         {/* Cinematic staggered grid */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-6 auto-rows-[140px] md:auto-rows-[180px]">
+        <div className="grid auto-rows-[120px] grid-cols-2 gap-3 sm:auto-rows-[150px] sm:gap-4 md:auto-rows-[180px] md:grid-cols-6 md:gap-6">
           {tiles.map((t, i) => (
             <motion.div
               key={t.seed}

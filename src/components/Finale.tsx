@@ -13,7 +13,7 @@ export function Finale() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl font-extralight leading-tight text-foreground md:text-6xl lg:text-7xl"
+          className="text-3xl font-extralight leading-tight text-foreground sm:text-4xl md:text-6xl lg:text-7xl"
         >
           I could&apos;ve sent an edit.
         </motion.h2>
@@ -23,7 +23,7 @@ export function Finale() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 1.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-gradient mt-6 text-4xl font-light italic leading-tight md:text-6xl lg:text-7xl"
+          className="text-gradient mt-5 text-3xl font-light italic leading-tight sm:text-4xl md:text-6xl lg:text-7xl"
         >
           Instead, I built something.
         </motion.h2>
