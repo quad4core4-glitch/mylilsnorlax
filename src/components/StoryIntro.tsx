@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export function StoryIntro() {
   return (
-    <section id="story" className="relative px-6 py-32">
+    <section id="story" className="relative px-4 py-20 sm:px-6 md:py-32">
       <div className="mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -18,7 +18,7 @@ export function StoryIntro() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, delay: 0.1 }}
-          className="text-3xl font-extralight leading-relaxed text-foreground/90 md:text-5xl"
+          className="text-2xl font-extralight leading-relaxed text-foreground/90 sm:text-3xl md:text-5xl"
         >
           There are a thousand ways to say it.
           <br />

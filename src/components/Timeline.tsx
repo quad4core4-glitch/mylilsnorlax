@@ -25,19 +25,19 @@ const moments = [
 
 export function Timeline() {
   return (
-    <section id="memories" className="relative py-32 px-6">
+    <section id="memories" className="relative px-4 py-20 sm:px-6 md:py-32">
       <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
-          className="mb-20 text-center"
+          className="mb-12 text-center md:mb-20"
         >
-          <p className="mb-4 text-xs font-light tracking-[0.4em] text-muted-foreground uppercase">
+          <p className="mb-3 text-[10px] font-light tracking-[0.4em] text-muted-foreground uppercase sm:text-xs">
             Memory Log
           </p>
-          <h2 className="text-gradient text-4xl font-extralight md:text-6xl">
+          <h2 className="text-gradient text-3xl font-extralight sm:text-4xl md:text-6xl">
             Moments, in order
           </h2>
         </motion.div>

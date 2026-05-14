@@ -75,7 +75,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="text-5xl font-extralight leading-[1.1] tracking-tight drop-shadow-[0_22px_48px_rgba(0,0,0,0.42)] md:text-7xl lg:text-8xl"
+              className="text-[3.25rem] font-extralight leading-[1.05] tracking-tight drop-shadow-[0_22px_48px_rgba(0,0,0,0.42)] sm:text-6xl md:text-7xl lg:text-8xl"
             >
               <span className="text-gradient">Annoii!</span>
               <span className="text-foreground">😽</span>
@@ -87,13 +87,13 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.4 }}
-          className="mt-12 flex justify-center"
+          className="mt-10 flex justify-center md:mt-12"
         >
           <button
             type="button"
             onClick={handleCTAClick}
             disabled={treeOpen}
-            className="group glass relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-9 py-4 text-sm font-light tracking-widest text-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)] enabled:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60"
+            className="group glass relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-xs font-light tracking-widest text-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)] enabled:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60 sm:px-9 sm:py-4 sm:text-sm"
           >
             <span className="relative z-10 text-lg leading-none" aria-hidden>
               🧸
