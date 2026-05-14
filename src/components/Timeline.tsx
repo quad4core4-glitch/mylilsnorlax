@@ -2,11 +2,21 @@ import { motion } from "framer-motion";
 import { HeartSticker } from "@/components/HeartSticker";
 import { SnorlaxSticker } from "@/components/SnorlaxSticker";
 
-const moments = [
+type Moment = {
+  date: string;
+  title?: string;
+  text: string;
+};
+
+const moments: Moment[] = [
   {
-    date: "The First Line",
-    title: "git init",
-    text: "Every story starts with an empty folder and an impossible idea. Mine started with you.",
+    date: "The First Message",
+    title: "Heyyy",
+    text: `spent 3 whole days
+thinking before sending 'hey'
+
+now im here
+making this at 1am 🙃`,
   },
   {
     date: "Late Nights",
@@ -69,10 +79,14 @@ export function Timeline() {
                 <p className="text-xs tracking-[0.3em] text-accent uppercase">
                   {m.date}
                 </p>
-                <h3 className="mt-2 text-2xl font-light text-foreground">
-                  {m.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {m.title ? (
+                  <h3 className="mt-2 text-2xl font-light text-foreground">{m.title}</h3>
+                ) : null}
+                <p
+                  className={`text-sm leading-relaxed text-muted-foreground whitespace-pre-line ${
+                    m.title ? "mt-3" : "mt-2"
+                  }`}
+                >
                   {m.text}
                 </p>
               </div>
