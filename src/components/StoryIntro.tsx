@@ -2,7 +2,10 @@ import { motion } from "framer-motion";
 
 export function StoryIntro() {
   return (
-    <section id="story" className="relative px-4 py-20 sm:px-6 md:py-32">
+    <section
+      id="story"
+      className="relative flex min-h-[100dvh] flex-col justify-center px-4 py-24 sm:px-6 md:py-32 lg:py-40"
+    >
       <div className="mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -31,8 +34,9 @@ export function StoryIntro() {
           transition={{ duration: 1.4, delay: 0.5 }}
           className="mx-auto mt-8 max-w-xl text-base font-light leading-relaxed text-muted-foreground"
         >
-          Line by line, commit by commit. Not because words weren&apos;t enough —
-          but because some feelings deserve their own little universe.
+          Yk, I&apos;m kinda bad at expressing things—
+          <br />
+          so I made this instead 🙃
         </motion.p>
       </div>
     </section>
