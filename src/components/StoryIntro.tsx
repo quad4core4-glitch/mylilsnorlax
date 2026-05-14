@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SnorlaxSticker } from "@/components/SnorlaxSticker";
 
 export function StoryIntro() {
   return (
@@ -6,6 +7,7 @@ export function StoryIntro() {
       id="story"
       className="relative flex min-h-[100dvh] flex-col justify-center px-4 py-24 sm:px-6 md:py-32 lg:py-40"
     >
+      <SnorlaxSticker className="absolute bottom-8 right-4 h-14 w-14 sm:bottom-12 sm:right-8 md:h-16 md:w-16" />
       <div className="mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
