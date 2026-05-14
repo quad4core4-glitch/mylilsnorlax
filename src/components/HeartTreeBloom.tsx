@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo } from "react";
 
-const LEAF_PATH =
-  "M12 26.5 C7 25.5 3.5 20 4 14 C4.5 8 8 4 12 6 C16 4 19.5 8 20 14 C20.5 20 17 25.5 12 26.5 Z";
+/** Vertically symmetric petal; radial copies form an 8-fold flower. */
+const PETAL_PATH =
+  "M50 112 C14 78 10 32 50 4 C90 32 86 78 50 112 Z";
 
-const TRUNK_PATH =
-  "M24 148 C10 147 4 132 4 112 C4 78 9 42 15 8 Q24 2 33 8 C39 42 44 78 44 112 C44 132 38 147 24 148 Z";
+const STEM_PATH =
+  "M24 148 C11 147 5 132 5 112 C5 82 10 52 18 22 Q24 6 30 22 C38 52 43 82 43 112 C43 132 37 147 24 148 Z";
 
-const CROWN_ROWS = [6, 5, 4, 3, 2, 1];
+const PETAL_COUNT = 8;
 
 type HeartTreeBloomProps = {
   open: boolean;
@@ -141,8 +142,8 @@ function LoveBurst3D({ specs }: { specs: BurstSpec[] }) {
             }}
             transition={{ delay: b.delay, duration: b.duration, ease: [0.22, 1, 0.36, 1] }}
           >
-            <svg viewBox="0 0 24 28" className="h-full w-full drop-shadow-[0_4px_12px_rgba(244,63,94,0.55)]" aria-hidden>
-              <path fill="url(#leafCrownGrad)" d={LEAF_PATH} />
+            <svg viewBox="0 0 100 120" className="h-full w-full drop-shadow-[0_4px_12px_rgba(244,63,94,0.55)]" aria-hidden>
+              <path fill="url(#petalFlowerGrad)" d={PETAL_PATH} />
             </svg>
           </motion.span>
         );
@@ -203,7 +204,7 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
     <AnimatePresence>
       {open ? (
         <motion.div
-          key="heart-tree"
+          key="heart-flower"
           className="pointer-events-auto fixed inset-0 z-[48] flex items-end justify-center bg-black/55 backdrop-blur-[10px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -282,15 +283,27 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
 
           <svg width="0" height="0" className="absolute overflow-hidden" aria-hidden>
             <defs>
-              <linearGradient id="leafCrownGrad" x1="10%" y1="100%" x2="90%" y2="0%">
+              <linearGradient id="petalFlowerGrad" x1="10%" y1="100%" x2="90%" y2="0%">
                 <stop offset="0%" stopColor="#fb7185" />
                 <stop offset="45%" stopColor="#f43f5e" />
                 <stop offset="100%" stopColor="#fb923c" />
               </linearGradient>
+              <linearGradient id="trunkWoodGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#451a03" />
+                <stop offset="35%" stopColor="#78350f" />
+                <stop offset="72%" stopColor="#b45309" />
+                <stop offset="100%" stopColor="#d4a574" />
+              </linearGradient>
+              <linearGradient id="trunkSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                <stop offset="42%" stopColor="rgba(255,255,255,0.18)" />
+                <stop offset="58%" stopColor="rgba(255,255,255,0.08)" />
+                <stop offset="100%" stopColor="rgba(0,0,0,0.18)" />
+              </linearGradient>
             </defs>
           </svg>
 
-          {/* Tree stage */}
+          {/* Symmetric 3D flower stage */}
           <div
             className="relative mb-0 flex w-full max-w-md flex-col-reverse items-center justify-end px-4 pb-4 sm:max-w-lg md:max-w-2xl md:pb-14 [perspective:min(1100px,96vw)] [perspective-origin:50%_88%]"
             style={{ transformStyle: "preserve-3d" }}
@@ -328,29 +341,15 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
                   className="relative z-[1] w-[2.75rem] overflow-visible sm:w-[3.35rem] md:w-[4.5rem]"
                   style={{ height: "clamp(6rem, 22vh, 11.5rem)" }}
                 >
-                  <defs>
-                    <linearGradient id="trunkWoodGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#451a03" />
-                      <stop offset="35%" stopColor="#78350f" />
-                      <stop offset="72%" stopColor="#b45309" />
-                      <stop offset="100%" stopColor="#d4a574" />
-                    </linearGradient>
-                    <linearGradient id="trunkSheen" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-                      <stop offset="42%" stopColor="rgba(255,255,255,0.18)" />
-                      <stop offset="58%" stopColor="rgba(255,255,255,0.08)" />
-                      <stop offset="100%" stopColor="rgba(0,0,0,0.18)" />
-                    </linearGradient>
-                  </defs>
                   <motion.g
                     style={{ transformOrigin: "24px 148px", transformBox: "fill-box" }}
                     initial={{ scaleY: 0 }}
                     animate={{ scaleY: 1 }}
                     transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <path d={TRUNK_PATH} fill="url(#trunkWoodGrad)" />
+                    <path d={STEM_PATH} fill="url(#trunkWoodGrad)" />
                     <path
-                      d={TRUNK_PATH}
+                      d={STEM_PATH}
                       fill="none"
                       stroke="rgba(62, 32, 10, 0.45)"
                       strokeWidth="0.55"
@@ -358,7 +357,7 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
                       strokeLinecap="round"
                     />
                     <path
-                      d={TRUNK_PATH}
+                      d={STEM_PATH}
                       fill="url(#trunkSheen)"
                       opacity={1}
                       style={{ mixBlendMode: "soft-light" }}
@@ -366,102 +365,97 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
                   </motion.g>
                 </motion.svg>
 
-                <motion.svg
-                  aria-hidden
-                  viewBox="0 0 220 320"
-                  preserveAspectRatio="xMidYMax meet"
-                  className="pointer-events-none absolute bottom-[calc(clamp(6rem,22vh,11.5rem)-0.5rem)] left-1/2 z-0 w-[min(88vw,22rem)] -translate-x-1/2 overflow-visible md:w-[26rem]"
-                  style={{ height: "min(46vh, 340px)" }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
+                {/* Radial 8-fold bloom: two staggered rings + raised core for depth */}
+                <div
+                  className="relative z-[2] -mb-1 flex w-full min-h-[min(40vh,320px)] justify-center sm:-mb-2 md:min-h-[min(44vh,360px)]"
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  <motion.path
-                    d="M110 300 Q45 210 28 95"
-                    fill="none"
-                    stroke="#4a2c18"
-                    strokeWidth="4.2"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.92 }}
-                    transition={{ delay: 0.6, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                  <motion.path
-                    d="M110 300 Q175 205 192 88"
-                    fill="none"
-                    stroke="#4a2c18"
-                    strokeWidth="4.2"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.92 }}
-                    transition={{ delay: 0.7, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                  <motion.path
-                    d="M110 295 Q108 180 112 72"
-                    fill="none"
-                    stroke="#5c3d2e"
-                    strokeWidth="3.2"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.75 }}
-                    transition={{ delay: 0.78, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </motion.svg>
-
-                {CROWN_ROWS.map((count, rowIndex) => (
                   <div
-                    key={`row-${count}`}
-                    className="relative z-[2] mb-0.5 flex flex-row justify-center gap-0.5 md:mb-1 md:gap-1"
+                    className="relative w-[min(92vw,23rem)] [transform-style:preserve-3d] md:w-[27rem]"
                     style={{
-                      transform: `translateZ(${-32 + rowIndex * 11}px)`,
+                      height: "min(44vh, 360px)",
+                      transformOrigin: "50% 90%",
                       transformStyle: "preserve-3d",
                     }}
                   >
-                    {Array.from({ length: count }).map((_, hi) => {
-                      const tilt = ((hi + rowIndex) % 5) * 4 - 8;
-                      const tz = -6 + hi * 3 + rowIndex * 2;
+                    {Array.from({ length: PETAL_COUNT }).map((_, i) => {
+                      const step = 360 / PETAL_COUNT;
                       return (
                         <motion.div
-                          key={`h-${rowIndex}-${hi}`}
-                          initial={{ scale: 0, opacity: 0, rotate: -48 + tilt * 0.35, y: 36, z: -40 }}
-                          animate={{
-                            scale: 1,
-                            opacity: 1,
-                            rotate: tilt,
-                            y: 0,
-                            z: tz,
+                          key={`petal-outer-${i}`}
+                          className="absolute left-1/2 bottom-[11%] w-[min(16vw,4.35rem)] -translate-x-1/2 [transform-style:preserve-3d] sm:w-[min(15vw,4.75rem)]"
+                          style={{
+                            height: "min(36vw, 9.25rem)",
+                            transformOrigin: "50% 100%",
+                            transform: `rotateZ(${i * step}deg) rotateX(54deg) translateZ(6px)`,
                           }}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
                           transition={{
                             type: "spring",
-                            stiffness: 260,
+                            stiffness: 220,
                             damping: 15,
-                            delay: 0.5 + rowIndex * 0.095 + hi * 0.032,
+                            delay: 0.48 + i * 0.042,
                           }}
-                          className="drop-shadow-[0_8px_18px_rgba(244,63,94,0.55)] [transform-style:preserve-3d]"
-                          style={{ transformStyle: "preserve-3d" }}
                         >
-                          <motion.div
-                            animate={{
-                              rotateY: [0, 14, -10, 0],
-                              rotateX: [0, -6, 4, 0],
-                            }}
-                            transition={{
-                              duration: 5.2 + (hi % 4) * 0.4,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: rowIndex * 0.08 + hi * 0.05,
-                            }}
-                            className="[transform-style:preserve-3d]"
+                          <svg
+                            viewBox="0 0 100 120"
+                            className="h-full w-full drop-shadow-[0_12px_26px_rgba(244,63,94,0.48)]"
+                            preserveAspectRatio="xMidYMax meet"
+                            aria-hidden
                           >
-                            <svg viewBox="0 0 24 28" className="h-4 w-4 sm:h-5 sm:w-5 md:h-7 md:w-7" aria-hidden>
-                              <path fill="url(#leafCrownGrad)" d={LEAF_PATH} />
-                            </svg>
-                          </motion.div>
+                            <path fill="url(#petalFlowerGrad)" d={PETAL_PATH} />
+                          </svg>
                         </motion.div>
                       );
                     })}
+                    {Array.from({ length: PETAL_COUNT }).map((_, i) => {
+                      const step = 360 / PETAL_COUNT;
+                      return (
+                        <motion.div
+                          key={`petal-inner-${i}`}
+                          className="absolute left-1/2 bottom-[13%] w-[min(14vw,3.75rem)] -translate-x-1/2 [transform-style:preserve-3d]"
+                          style={{
+                            height: "min(30vw, 7.75rem)",
+                            transformOrigin: "50% 100%",
+                            transform: `rotateZ(${i * step + step / 2}deg) rotateX(38deg) translateZ(34px)`,
+                          }}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 0.9, opacity: 1 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 240,
+                            damping: 16,
+                            delay: 0.62 + i * 0.038,
+                          }}
+                        >
+                          <svg
+                            viewBox="0 0 100 120"
+                            className="h-full w-full drop-shadow-[0_8px_20px_rgba(244,63,94,0.42)]"
+                            preserveAspectRatio="xMidYMax meet"
+                            aria-hidden
+                          >
+                            <path fill="url(#petalFlowerGrad)" d={PETAL_PATH} opacity={0.96} />
+                          </svg>
+                        </motion.div>
+                      );
+                    })}
+                    <motion.div
+                      aria-hidden
+                      className="pointer-events-none absolute left-1/2 bottom-[14%] z-[4] h-[min(15vw,3.75rem)] w-[min(15vw,3.75rem)] -translate-x-1/2 rounded-full [transform-style:preserve-3d]"
+                      style={{
+                        background:
+                          "radial-gradient(circle at 32% 30%, #fff7ed, #fde68a 38%, #f59e0b 62%, #9a3412 100%)",
+                        boxShadow:
+                          "inset 0 -8px 14px rgba(120,53,15,0.42), 0 0 32px rgba(251,113,133,0.55)",
+                        transform: "translateZ(46px)",
+                      }}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.88, type: "spring", stiffness: 280, damping: 16 }}
+                    />
                   </div>
-                ))}
+                </div>
 
                 {/* base glow */}
                 <motion.div
@@ -476,7 +470,7 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
                   transition={{ delay: 0.8, duration: 1.2, ease: "easeOut" }}
                 />
 
-                {/* crown halo */}
+                {/* bloom halo */}
                 <motion.div
                   aria-hidden
                   className="pointer-events-none absolute -top-12 left-1/2 z-[3] h-28 w-28 -translate-x-1/2 rounded-full bg-gradient-to-t from-pink-400/55 to-transparent opacity-0 blur-2xl md:h-40 md:w-40"
@@ -495,10 +489,10 @@ export function HeartTreeBloom({ open, onComplete }: HeartTreeBloomProps) {
             transition={{ delay: 1.2, duration: 3.6, times: [0, 0.18, 0.78, 1], ease: "easeOut" }}
           >
             <p className="text-[10px] font-light tracking-[0.45em] text-pink-200/80 uppercase">
-              for you
+              For you,
             </p>
             <p className="mt-2 text-2xl font-extralight italic text-white drop-shadow-[0_4px_20px_rgba(251,113,133,0.55)] sm:text-3xl md:text-4xl">
-              this one&apos;s yours, Annoii
+              this ones yours my lil snorlax
             </p>
           </motion.div>
         </motion.div>

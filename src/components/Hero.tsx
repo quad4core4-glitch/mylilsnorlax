@@ -25,7 +25,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden">
       <HeartTreeBloom open={treeOpen} onComplete={handleBloomComplete} />
 
       <AnimatePresence>
@@ -56,7 +56,7 @@ export function Hero() {
 
       <Particles count={50} />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center [text-wrap:balance]">
         <div
           className="inline-block [perspective:min(920px,96vw)]"
           style={{ perspectiveOrigin: "50% 35%" }}
@@ -93,7 +93,7 @@ export function Hero() {
             type="button"
             onClick={handleCTAClick}
             disabled={treeOpen}
-            className="group glass relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-xs font-light tracking-widest text-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)] enabled:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60 sm:px-9 sm:py-4 sm:text-sm"
+            className="group glass relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/10 px-7 py-3.5 text-xs font-light tracking-widest text-foreground shadow-[0_8px_40px_rgba(0,0,0,0.2)] transition-all hover:scale-[1.03] hover:shadow-[0_0_50px_var(--glow-pink)] enabled:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60 sm:px-9 sm:py-4 sm:text-sm"
           >
             <span className="relative z-10 text-lg leading-none" aria-hidden>
               🧸
