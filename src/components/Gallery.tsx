@@ -25,16 +25,6 @@ const tiles: Tile[] = [
   { seed: "snor-08", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-10" },
   { seed: "snor-09", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-0" },
   { seed: "snor-10", ratio: "aspect-[4/3]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-4", caption: "Soft chaos" },
-  { seed: "snor-11", ratio: "aspect-square", span: "md:col-span-1", offset: "md:-translate-y-6" },
-  { seed: "snor-12", ratio: "aspect-[3/4]", span: "md:col-span-1", offset: "md:translate-y-8", caption: "Sleepy smiles" },
-  { seed: "snor-13", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:translate-y-2" },
-  { seed: "snor-14", ratio: "aspect-square", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-2", caption: "Just us" },
-  { seed: "snor-15", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-12" },
-  { seed: "snor-16", ratio: "aspect-[4/3]", span: "md:col-span-2", offset: "md:translate-y-0", caption: "Midnight talks", sub: "till the world quieted" },
-  { seed: "snor-17", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-6" },
-  { seed: "snor-18", ratio: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-4", caption: "Soft and certain" },
-  { seed: "snor-19", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:translate-y-8" },
-  { seed: "snor-20", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-2", caption: "Always", sub: "and after that, still" },
 ];
 
 const imgUrl = (seed: string, w = 900) => `https://picsum.photos/seed/${seed}/${w}/${w}`;
@@ -61,7 +51,7 @@ export function Gallery() {
             Frames
           </p>
           <h2 className="text-gradient text-3xl font-extralight sm:text-4xl md:text-6xl">
-            Twenty pieces of us
+            Ten pieces of us
           </h2>
           <p className="mx-auto mt-5 max-w-md text-[13px] font-light leading-relaxed text-muted-foreground/80 sm:text-sm">
             small moments, scattered like stars — each one quietly proving you were here.
@@ -131,7 +121,7 @@ export function Gallery() {
           transition={{ duration: 1.4, delay: 0.2 }}
           className="mt-20 text-center text-sm font-extralight italic tracking-wide text-muted-foreground/70"
         >
-          twenty frames. one feeling. infinite reruns.
+          ten frames. one feeling. infinite reruns.
         </motion.p>
       </div>
 
