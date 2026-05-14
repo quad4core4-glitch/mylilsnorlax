@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { HeartSticker } from "@/components/HeartSticker";
 import { SnorlaxSticker } from "@/components/SnorlaxSticker";
 
 const moments = [
@@ -27,6 +28,7 @@ const moments = [
 export function Timeline() {
   return (
     <section id="memories" className="relative px-4 py-20 sm:px-6 md:py-32">
+      <HeartSticker className="absolute left-2 top-40 hidden h-8 w-8 text-primary/20 sm:left-5 sm:block md:top-48 md:h-9 md:w-9" />
       <SnorlaxSticker className="absolute right-3 top-36 hidden h-12 w-12 opacity-[0.22] sm:right-6 sm:block md:top-44 md:h-14 md:w-14" />
       <div className="mx-auto max-w-4xl">
         <motion.div
