@@ -18,18 +18,18 @@ now im here making this at 1am 🙃`,
   },
   {
     date: "Late Nights",
-    title: "Commit by commit",
-    text: "I learned how you take your coffee somewhere between two error messages and a fixed bug.",
+    title: "idk when",
+    text: "but talking to you kinda became part of my everyday life",
   },
   {
-    date: "First Deploy",
-    title: "It went live",
-    text: "I shipped a small thing for you. You smiled. Best build of my life.",
+    date: "SIDE EFFECTS",
+    title: "lately",
+    text: "idk why but i stay online longer now😹",
   },
   {
-    date: "Today",
-    title: "Still building",
-    text: "Some chapters write themselves in pull requests. This one was always for you.",
+    date: "Bug Report",
+    title: "for some reason",
+    text: "its weird how one message from ya can change my whole mood🫠",
   },
 ];
 
