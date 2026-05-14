@@ -14,9 +14,7 @@ const moments: Moment[] = [
     title: "Heyyy",
     text: `spent 3 whole days
 thinking before sending 'hey'
-
-now im here
-making this at 1am 🙃`,
+now im here making this at 1am 🙃`,
   },
   {
     date: "Late Nights",
