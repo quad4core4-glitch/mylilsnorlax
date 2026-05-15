@@ -2,32 +2,53 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { HeartParticles } from "./HeartParticles";
+import gallery01 from "@/assets/gallery/01.png";
+import gallery02 from "@/assets/gallery/02.png";
+import gallery03 from "@/assets/gallery/03.png";
+import gallery04 from "@/assets/gallery/04.png";
+import gallery05 from "@/assets/gallery/05.png";
+import gallery06 from "@/assets/gallery/06.png";
+import gallery07 from "@/assets/gallery/07.png";
+import gallery08 from "@/assets/gallery/08.png";
+import gallery09 from "@/assets/gallery/09.png";
+import gallery10 from "@/assets/gallery/10.png";
+
+const galleryImages = [
+  gallery01,
+  gallery02,
+  gallery03,
+  gallery04,
+  gallery05,
+  gallery06,
+  gallery07,
+  gallery08,
+  gallery09,
+  gallery10,
+] as const;
 
 // Curated cinematic layout: varied sizes + staggered offsets + captions.
-// Each tile has its own column/row span and a small y-offset to feel organic.
+// Tile order matches `src/assets/gallery/01.png` … `10.png`.
 type Tile = {
-  seed: string;
-  ratio: string; // tailwind aspect ratio
-  span: string; // grid column/row span
-  offset: string; // translateY offset
+  id: string;
+  ratio: string;
+  span: string;
+  offset: string;
   caption?: string;
   sub?: string;
 };
 
 const tiles: Tile[] = [
-  { seed: "snor-01", ratio: "aspect-[3/4]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-0", caption: "First frame", sub: "where it began" },
-  { seed: "snor-02", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-8" },
-  { seed: "snor-03", ratio: "aspect-[4/5]", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-4", caption: "Quiet hours" },
-  { seed: "snor-04", ratio: "aspect-[4/3]", span: "md:col-span-2", offset: "md:translate-y-12" },
-  { seed: "snor-05", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-2", caption: "Snorlax mode" },
-  { seed: "snor-06", ratio: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", offset: "md:translate-y-6" },
-  { seed: "snor-07", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:-translate-y-2", caption: "Golden hour", sub: "you, glowing" },
-  { seed: "snor-08", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-10" },
-  { seed: "snor-09", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-0" },
-  { seed: "snor-10", ratio: "aspect-[4/3]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-4", caption: "Soft chaos" },
+  { id: "g1", ratio: "aspect-[3/4]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-0", caption: "First frame", sub: "where it began" },
+  { id: "g2", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-8" },
+  { id: "g3", ratio: "aspect-[4/5]", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-4", caption: "Quiet hours" },
+  { id: "g4", ratio: "aspect-[4/3]", span: "md:col-span-2", offset: "md:translate-y-12" },
+  { id: "g5", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-2", caption: "Snorlax mode" },
+  { id: "g6", ratio: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", offset: "md:translate-y-6" },
+  { id: "g7", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:-translate-y-2", caption: "Golden hour", sub: "you, glowing" },
+  { id: "g8", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-10" },
+  { id: "g9", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-0" },
+  { id: "g10", ratio: "aspect-[4/3]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-4", caption: "Soft chaos" },
 ];
-
-const imgUrl = (seed: string, w = 900) => `https://picsum.photos/seed/${seed}/${w}/${w}`;
 
 export function Gallery() {
   const [active, setActive] = useState<number | null>(null);
@@ -62,7 +83,7 @@ export function Gallery() {
         <div className="grid auto-rows-[120px] grid-cols-2 gap-3 sm:auto-rows-[150px] sm:gap-4 md:auto-rows-[180px] md:grid-cols-6 md:gap-6">
           {tiles.map((t, i) => (
             <motion.div
-              key={t.seed}
+              key={t.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -86,7 +107,7 @@ export function Gallery() {
                 className="group glass relative h-full w-full overflow-hidden rounded-2xl transition-shadow duration-700 hover:shadow-[0_0_40px_var(--glow-purple),0_0_80px_var(--glow-pink)]"
               >
                 <img
-                  src={imgUrl(t.seed)}
+                  src={galleryImages[i]}
                   alt={t.caption ?? `Memory ${i + 1}`}
                   loading="lazy"
                   className={`h-full w-full object-cover ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
@@ -147,7 +168,7 @@ export function Gallery() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              src={imgUrl(tiles[active].seed, 1600)}
+              src={galleryImages[active]}
               alt={tiles[active].caption ?? `Memory ${active + 1}`}
               className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain shadow-[0_0_80px_var(--glow-purple)]"
             />
