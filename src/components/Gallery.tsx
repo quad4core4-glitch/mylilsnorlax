@@ -73,10 +73,10 @@ export function Gallery() {
             Frames
           </p>
           <h2 className="text-gradient text-3xl font-extralight sm:text-4xl md:text-6xl">
-            Ten pieces of us
+            Ten pieces U🎀
           </h2>
           <p className="mx-auto mt-5 max-w-md text-[13px] font-light leading-relaxed text-muted-foreground/80 sm:text-sm">
-            small moments, scattered like stars — each one quietly proving you were here.
+            small moments, scattered like stars.
           </p>
         </motion.div>
 
