@@ -111,7 +111,7 @@ export function Gallery() {
                   src={galleryImages[i]}
                   alt={t.caption ?? `Memory ${i + 1}`}
                   loading="lazy"
-                  className={`h-full w-full object-cover ${t.position || "object-center"} ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
+                  className={`h-full w-full object-contain ${t.position || "object-center"} ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
                 />
                 {/* gradient veil */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
