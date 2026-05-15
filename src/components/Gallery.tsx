@@ -81,7 +81,7 @@ export function Gallery() {
         </motion.div>
 
         {/* Cinematic staggered grid */}
-        <div className="grid auto-rows-[120px] grid-cols-2 gap-3 sm:auto-rows-[150px] sm:gap-4 md:auto-rows-[180px] md:grid-cols-6 md:gap-6">
+        <div className="columns-2 gap-3 sm:columns-3 md:columns-4 space-y-3 sm:space-y-4 md:space-y-6">
           {tiles.map((t, i) => (
             <motion.div
               key={t.id}
@@ -93,7 +93,7 @@ export function Gallery() {
                 delay: (i % 6) * 0.06,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`${t.span} ${t.offset} relative`}
+              className={`relative break-inside-avoid`}
             >
               <motion.button
                 onClick={() => setActive(i)}
@@ -105,13 +105,13 @@ export function Gallery() {
                   delay: (i % 7) * 0.4,
                 }}
                 whileHover={{ scale: 1.02 }}
-                className="group glass relative h-full w-full overflow-hidden rounded-2xl transition-shadow duration-700 hover:shadow-[0_0_40px_var(--glow-purple),0_0_80px_var(--glow-pink)]"
+                className="group glass relative w-full overflow-hidden rounded-2xl transition-shadow duration-700 hover:shadow-[0_0_40px_var(--glow-purple),0_0_80px_var(--glow-pink)]"
               >
                 <img
                   src={galleryImages[i]}
                   alt={t.caption ?? `Memory ${i + 1}`}
                   loading="lazy"
-                  className={`h-full w-full object-contain ${t.position || "object-center"} ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
+                  className={`w-full h-auto block grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
                 />
                 {/* gradient veil */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
