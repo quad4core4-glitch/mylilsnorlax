@@ -35,19 +35,20 @@ type Tile = {
   offset: string;
   caption?: string;
   sub?: string;
+  position?: string;
 };
 
 const tiles: Tile[] = [
   { id: "g1", ratio: "aspect-[3/4]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-0", caption: "First frame", sub: "where it began" },
-  { id: "g2", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-8" },
-  { id: "g3", ratio: "aspect-[4/5]", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-4", caption: "Quiet hours" },
+  { id: "g2", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-8", position: "object-top" },
+  { id: "g3", ratio: "aspect-[4/5]", span: "md:col-span-1 md:row-span-2", offset: "md:-translate-y-4", caption: "Quiet hours", position: "object-top" },
   { id: "g4", ratio: "aspect-[4/3]", span: "md:col-span-2", offset: "md:translate-y-12" },
-  { id: "g5", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-2", caption: "Snorlax mode" },
+  { id: "g5", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-2", caption: "Snorlax mode", position: "object-top" },
   { id: "g6", ratio: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", offset: "md:translate-y-6" },
-  { id: "g7", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:-translate-y-2", caption: "Golden hour", sub: "you, glowing" },
+  { id: "g7", ratio: "aspect-[5/4]", span: "md:col-span-2", offset: "md:-translate-y-2", caption: "Golden hour", sub: "you, glowing", position: "object-top" },
   { id: "g8", ratio: "aspect-square", span: "md:col-span-1", offset: "md:translate-y-10" },
-  { id: "g9", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-0" },
-  { id: "g10", ratio: "aspect-[4/3]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-4", caption: "Soft chaos" },
+  { id: "g9", ratio: "aspect-[4/5]", span: "md:col-span-1", offset: "md:translate-y-0", position: "object-top" },
+  { id: "g10", ratio: "aspect-[4/3]", span: "md:col-span-2 md:row-span-2", offset: "md:translate-y-4", caption: "Soft chaos", position: "object-top" },
 ];
 
 export function Gallery() {
@@ -110,7 +111,7 @@ export function Gallery() {
                   src={galleryImages[i]}
                   alt={t.caption ?? `Memory ${i + 1}`}
                   loading="lazy"
-                  className={`h-full w-full object-cover ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
+                  className={`h-full w-full object-cover ${t.position || "object-center"} ${t.ratio} grayscale-[15%] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:grayscale-0`}
                 />
                 {/* gradient veil */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
