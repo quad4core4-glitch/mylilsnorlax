@@ -15,7 +15,7 @@ export function Finale() {
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl font-extralight leading-tight text-foreground sm:text-4xl md:text-6xl lg:text-7xl"
         >
-          I could&apos;ve sent an edit.
+          Idk how this turned<br />into a whole website
         </motion.h2>
 
         <motion.h2
@@ -25,7 +25,7 @@ export function Finale() {
           transition={{ duration: 1.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-gradient mt-5 text-3xl font-light italic leading-tight sm:text-4xl md:text-6xl lg:text-7xl"
         >
-          Instead, I built something.
+          but worth it🙃
         </motion.h2>
 
         <motion.div
@@ -43,7 +43,7 @@ export function Finale() {
           transition={{ duration: 1.4, delay: 2.4 }}
           className="mt-10 text-xs font-light tracking-[0.5em] text-muted-foreground uppercase"
         >
-          For you — always
+          For you- by girleee
         </motion.p>
       </div>
     </section>
